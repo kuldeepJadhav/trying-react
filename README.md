@@ -1,6 +1,6 @@
 # trying-react
 
 
-#steps
+# steps
 npm install
 npm run start
