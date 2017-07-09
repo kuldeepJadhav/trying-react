@@ -1,0 +1,79 @@
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", 
+    "Fira Sans", "Droid Sans", "Helvetica Neue", 
+    sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: red;
+}
+
+li {
+	list-style-type: none; 
+}
+
+.container {
+	max-width: 1200px;
+	margin: auto;
+}
+
+.languages {
+	display: flex;
+	justify-content: center;
+}
+
+.languages li {
+	margin: 10px;
+	font-weight: bold;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.popular-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.popular-item {
+	margin: 20px;
+	text-align: center;
+}
+
+.space-list-item {
+	margin-bottom: 7px;
+}
+
+.avatar {
+	width: 150px;
+}
+
+.popular-rank {
+	font-size: 15px;
+	margin: 5px;
+}
+
+.nav {
+	display: flex;
+}
+
+.nav li {
+	margin-right: 10px;
+	color: red;
+	list-style-type: none
+}
+.active {
+	font-weight: bold;
+}
+
+.row {
+	display: flex;
+	justify-content: space-around;
+}
+
+.column {
+	display: flex;
+	flex-direction: column
+}
