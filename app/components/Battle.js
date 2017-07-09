@@ -1,24 +1,9 @@
 
 var React = require('react');
 var PropTypes = require('prop-types');
+var Link = require('react-router-dom').Link;
+var PlayerPreview = require('./PlayerPreview');
 
-function PlayerPreview(props) {
-
-	return (
-
-		<div className='column'>
-			<img src={props.avatar} className='avatar'/>
-			<h3> @{props.username}</h3>
-			<h3>{props.player}</h3>
-		</div>
-	);
-}
-
-PlayerPreview.propTypes = {
-	avatar: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired,
-	player: PropTypes.string.isRequired
-}
 
 class PlayerInput extends React.Component {
 
@@ -79,6 +64,7 @@ class Battle extends React.Component {
 		};
 
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onReset = this.onReset.bind(this);
 	}
 
 	handleSubmit(id, username) {
@@ -89,7 +75,17 @@ class Battle extends React.Component {
 			return newState;
 		});
 	}
+
+	onReset(id) {
+		this.setState(function() {
+			var newState = {};
+			newState[id + 'Name'] = '';
+			newState[id + 'Image'] = '';
+			return newState;
+		});
+	}
 	render() {
+		var match = this.props.match;
 		var playerOneName = this.state.playerOneName;
 		var playerTwoName = this.state.playerTwoName;
 		return (
@@ -99,8 +95,16 @@ class Battle extends React.Component {
 					{!playerTwoName && <PlayerInput id='playerTwo' label='player Two' onSubmit={this.handleSubmit}/>}
 				</div>
 				<div className='row'>
-					{playerOneName && <PlayerPreview player='playerOne' avatar={this.state.playerOneImage} username={this.state.playerOneName}/>}
-					{playerTwoName && <PlayerPreview player='playerTwo' avatar={this.state.playerTwoImage} username={this.state.playerTwoName}/>}
+					{playerOneName && <PlayerPreview player='playerOne' onReset={this.onReset} avatar={this.state.playerOneImage} username={this.state.playerOneName}> <button onClick={this.onReset.bind(null, 'playerOne')}> Reset </button> </PlayerPreview>}
+					{playerTwoName && <PlayerPreview player='playerTwo' onReset={this.onReset} avatar={this.state.playerTwoImage} username={this.state.playerTwoName}>  <button onClick={this.onReset.bind(null, 'playerTwo')}> Reset </button> </PlayerPreview>}
+				</div>
+				<div>
+					{playerOneName && playerTwoName && <Link to ={
+						{
+							pathname:match.url + '/results',
+							search: `?playerOneName=` + playerOneName + `&playerTwoName=` + playerTwoName
+						}
+					}className='button' >Battle</Link>}
 				</div>
 			</div>
 		)
